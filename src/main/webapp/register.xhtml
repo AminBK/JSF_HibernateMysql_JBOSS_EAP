@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pm="http://primefaces.org/mobile" >
+      
+<!-- 	<f:view renderKitId="PRIMEFACES_MOBILE" /> -->
+      
+    <h:outputStylesheet library="webjars" name="bootstrap/3.3.5/css/bootstrap.min.css" />
+	<h:outputScript library="webjars" name="jquery/2.1.4/jquery.js" />
+<!-- 	<h:outputScript library="webjars" name="jquery/2.1.4/js/jquery.js" /> -->
+	
+<!--     <h:outputStylesheet library="webjars" name="jquery-ui/1.11.4/jquery-ui.css"/> -->
+<!--     <h:outputScript library="webjars" name="jquery-ui/1.11.4/jquery-ui.js"/> -->
+    
+	<h:outputStylesheet library="css" name="style.css"  />
+	
+
+	<h:outputStylesheet library="css" name="style.css"  />
+	 
+	<script type="text/javascript">var $j = jQuery.noConflict(true);</script>
+
+    <h:head>
+        <title>JSF Hibernate CRUD Example</title>
+        <style>
+            tfoot{
+                text-align: center;
+            }
+            thead{
+                background-color: magenta;
+                color: white;
+            }
+            td{
+                font-weight: bold;
+            }
+            .msg{
+                font-size: small;
+                color: blue;
+            }
+        </style>
+    </h:head>
+    <h:body>
+     	<h3>Registration</h3> 
+        <h:form id="form_1" class="form-horizontal">
+        	<f:facet name="header"> 
+            	<h:outputText value="Add Customer Information"/>
+            </f:facet> 
+	        <div class="form-group"> 
+		        <label for="un" class="col-sm-2 control-label">User Name</label> 
+			  	<div class="col-sm-2">
+			    	<h:inputText id="un" value="#{customer.userName}" placeholder="User name" class="form-control" required="true"  requiredMessage="Please enter user name"/>
+			  	</div>
+			  	<div class="col-sm-4 ">
+			 		<h:message id="userNameMessage"  for="un" errorClass="error-class help-block"/>
+			   	</div>  
+	        </div>   
+	              
+   	        <div class="form-group"> 
+		        <label for="fn" class="col-sm-2 control-label">First Name</label> 
+			  	<div class="col-sm-2">
+			    	<h:inputText id="fn" value="#{customer.firstName}" placeholder="First name" class="form-control" required="true"  requiredMessage="Please enter first name"/>
+			  	</div>
+			  	<div class="col-sm-4 ">
+			 		<h:message id="firstNameMessage"  for="fn" errorClass="error-class help-block"/>
+			   	</div>  
+	        </div>    
+	        
+	        <div class="form-group"> 
+		        <label for="ln" class="col-sm-2 control-label">Last Name</label> 
+			  	<div class="col-sm-2">
+			    	<h:inputText id="ln" value="#{customer.lastName}" placeholder="Last name" class="form-control" required="true"  requiredMessage="Please enter last name"/>
+			  	</div>
+			  	<div class="col-sm-4 ">
+			 		<h:message id="lastNameMessage"  for="ln" errorClass="error-class help-block"/>
+			   	</div>  
+	        </div>       
+	        
+	        <div class="form-group"> 
+		        <label for="eml" class="col-sm-2 control-label">Email</label> 
+			  	<div class="col-sm-2">
+			    	<h:inputText id="eml" value="#{customer.email}" placeholder="Email" class="form-control" required="true"  requiredMessage="Please enter email">
+			    		<f:validator validatorId="emailValidator" />
+			    	</h:inputText>
+			    	
+			  	</div>
+			  	<div class="col-sm-4 ">
+			 		<h:message id="emailMessage"  for="eml" errorClass="error-class help-block"/>
+			   	</div>  
+	        </div>   
+	        
+	         <div class="form-group"> 
+		        <label for="s" class="col-sm-2 control-label">Date of birth</label> 
+			  	<div class="col-sm-2">
+<!-- 			    	<h:inputText id="s" value="#{customer.sd}" placeholder="Date of birth" class="form-control datepicker" required="true"  requiredMessage="Please enter date of birth"> -->
+<!-- 			    		<f:validator validatorId="dateFormatPastValidatorForString" /> -->
+<!-- 			    	</h:inputText> -->
+			    	 
+<!-- 			    	<h:inputText id="s" value="#{customer.sd}" placeholder="Date of birth" class="form-control datepicker" required="true"  requiredMessage="Please enter date of birth"> -->
+<!-- 			    		<f:validator validatorId="dateFormatPastValidatorForString" /> -->
+<!-- 			    	</h:inputText> -->
+<!-- 			    	 <p:calendar id="s" value="#{customer.sd}" navigator="true" pattern="dd-MMM-yyyy" placeholder="Date of birth" class="form-control datepicker" required="true"  requiredMessage="Please enter date of birth"> -->
+<!-- 			    	 	<f:validator validatorId="dateFormatPastValidatorForString" /> -->
+<!-- 			    	 </p:calendar> -->
+						<p:calendar id="s" value="#{customer.sd}" navigator="true" pattern="dd-MM-yyyy" required="true" placeholder="Date of birth"  requiredMessage="Please enter date of birth" >
+							<f:validator validatorId="dateFormatPastValidatorForString" />
+						</p:calendar>
+ 
+			  	</div> 
+			  	<div class="col-sm-4 ">
+			 		<h:message id="dateOfBirthMessage"  for="s" errorClass="error-class help-block"/>
+			   	</div>  
+	        </div>      
+	        
+	       	<div class="form-group"> 
+		        <label for="password" class="col-sm-2 control-label">Password</label> 
+			  	<div class="col-sm-2">
+			    	<h:inputSecret id="password" value="#{customer.password}" placeholder="Password" class="form-control" required="true"  requiredMessage="Please enter password">
+			    		<f:validator validatorId="passwordValidator" />
+			    		<f:attribute name="confirmPassword" value="#{confirmPassword}" />
+			    	</h:inputSecret>
+			  	</div>
+			  	<div class="col-sm-4 ">
+			 		<h:message id="passwordMessage"  for="password" errorClass="error-class help-block"/>
+			   	</div>  
+	        </div>     
+	         
+	        <div class="form-group"> 
+		        <label for="confirmPassword" class="col-sm-2 control-label">Confirm password</label>  
+			  	<div class="col-sm-2">
+			    	<h:inputSecret id="confirmPassword" value="#{customer.password}" placeholder="Confirm password" class="form-control" required="true"  binding="#{confirmPassword}" requiredMessage="Please enter confirm password">
+<!-- 			    		<f:validator validatorId="passwordValidator" /> -->
+<!-- 			    		<f:attribute name="confirmPassword" value="#{confirmPassword}" />  -->
+			    	</h:inputSecret>
+			  	</div>
+			  	<div class="col-sm-4 "> 
+			 		<h:message id="confirmPasswordMessage"  for="password" errorClass="error-class help-block" />
+			   	</div>  
+	        </div>                 
+	        
+			<div class="form-group">
+			  	<div class="col-sm-offset-2 col-sm-2">
+			    	<h:commandButton action="#{customer.saveCustomer}" value="Register" class="btn btn-success "/> 
+<!-- 			    	<f:ajax render="@form" execute="@form"/> -->
+			    </div>
+			</div> 
+<!-- 					<h:commandButton value="Submit" action="#{customer.saveCustomer}"> -->
+<!-- 						<f:ajax render="@form" execute="@form"/> -->
+<!-- 					</h:commandButton>		 -->
+<!--                 <f:facet name="footer"> -->
+<!--                     <h:outputLabel value="#{customer.msg}" id="msg" styleClass="msg"/> -->
+<!--                     <h:commandButton value="Save" action="#{customer.saveCustomer}"> -->
+<!--                     	<f:ajax render="@form" execute="@form"/> -->
+<!--                     </h:commandButton> -->
+<!--                 </f:facet> -->
+<!--             </h:panelGrid> -->
+             
+        </h:form>
+        
+        <h:outputScript library="js" name="common.js" />
+    </h:body>
+</html>

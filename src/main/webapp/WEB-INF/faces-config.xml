@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<faces-config version="2.0" xmlns="http://java.sun.com/xml/ns/javaee"
+ xmlns:xi="http://www.w3.org/2001/XInclude"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+	<navigation-rule>  
+	    <description>login user</description>  
+	    <from-view-id>/login.xhtml</from-view-id>  
+	    <navigation-case>  
+	        <from-action>#{customer.login}</from-action>  
+	        <from-outcome>output</from-outcome>  
+	        <to-view-id>/success.xhtml</to-view-id>  
+	    </navigation-case>  
+	
+	    <navigation-case>  
+	        <from-action>#{customer.login}</from-action>  
+	        <from-outcome>invalid</from-outcome>  
+	        <to-view-id>/error.xhtml</to-view-id>  
+	    </navigation-case>  
+	</navigation-rule>  
+
+	<navigation-rule>  
+	    <description>register new user</description>  
+	    <from-view-id>/register.xhtml</from-view-id>  
+	    <navigation-case>  
+	        <from-action>#{customer.saveCustomer}</from-action>  
+	        <from-outcome>success</from-outcome>  
+	        <to-view-id>/success.xhtml</to-view-id>  
+	    </navigation-case>  
+	    <navigation-case>  
+	        <from-action>#{customer.saveCustomer}</from-action>  
+	        <from-outcome>unsuccess</from-outcome>  
+	        <to-view-id>/unsuccess.xhtml</to-view-id>  
+	    </navigation-case>  
+	</navigation-rule> 
+	<validator>
+		<validator-id>passwordValidator</validator-id>
+		<validator-class>scm.web.util.PasswordValidator</validator-class>
+	</validator>
+	<validator>
+		<validator-id>dateFormatPastValidatorForString</validator-id>
+		<validator-class>scm.web.util.DateFormatPastValidatorForString</validator-class>
+	</validator>
+	<validator>
+		<validator-id>emailValidator</validator-id>
+		<validator-class>scm.web.util.EmailValidator</validator-class>
+	</validator>
+	<application>
+		<locale-config>
+			<default-locale>en</default-locale>
+			<supported-locale>zh_CN</supported-locale>
+		</locale-config>
+		<resource-bundle>
+			<base-name>scm.web.messages.messages</base-name>
+			<var>msgs</var>
+		</resource-bundle>
+		<navigation-handler>
+			org.primefaces.mobile.application.MobileNavigationHandler
+		</navigation-handler>
+	</application>
+	<render-kit>
+            <renderer>
+                <component-family>javax.faces.Input</component-family>
+                <renderer-type>javax.faces.Text</renderer-type>
+                <renderer-class>scm.web.util.InputTextRenderer</renderer-class>
+            </renderer>
+            <renderer>
+                <component-family>javax.faces.Input</component-family>
+                <renderer-type>javax.faces.Secret</renderer-type>
+                <renderer-class>scm.web.util.InputSecretRenderer</renderer-class>
+            </renderer>
+            <renderer>
+                <component-family>javax.faces.Input</component-family>
+                <renderer-type>javax.faces.Textarea</renderer-type>
+                <renderer-class>scm.web.util.InputTextAreaRenderer</renderer-class>
+            </renderer>
+       </render-kit>
+	
+</faces-config>
